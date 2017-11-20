@@ -1,0 +1,80 @@
+h1 {
+  font-size: 1.2em;
+  color: white;
+  margin-bottom: 0;
+  background-color: #607D8B
+}
+
+h2 {
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+
+  nav a:visited, a:link {
+    color: #607D8B;
+  }
+
+  nav a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+  }
+
+  nav a.active {
+    color: #039be5;
+  }
+
+.hamburger {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 96px;
+  height: 96px;
+  font-size: 0;
+  text-indent: -9999px;
+  cursor: pointer;
+  outline: none;
+  background: none;
+  border: 0;
+}
+
+
+  .hamburger span {
+    display: block;
+    position: absolute;
+    top: 44px;
+    left: 18px;
+    right: 18px;
+    height: 8px;
+    background: #607D8B;
+  }
+
+    .hamburger span::before,
+    .hamburger span::after {
+      display: block;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background-color: #607D8B;
+      content: "";
+    }
+
+    .hamburger span::before {
+      top: -20px;
+    }
+
+    .hamburger span::after {
+      bottom: -20px;
+    }

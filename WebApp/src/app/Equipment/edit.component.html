@@ -1,0 +1,27 @@
+<h2>Edit</h2>
+
+<div *ngIf="equipment">
+  <h2>{{equipment.name}}</h2>
+  <div>
+    <label>assetNumber: </label>
+    {{equipment.assetNumber}}
+  </div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="equipment.name" placeholder="name" />
+  </div>
+  <ng-template #dynamic></ng-template>
+
+  <div>
+    <app-add-banner [ads]="ads"></app-add-banner>
+  </div>
+
+  <div>
+    <app-add-banner [ads]="ads"></app-add-banner>
+  </div>
+  <button (click)="save()">Save</button>
+  <button (click)="goBack()">Back</button>
+</div>
+
+
+ 

@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <RetryAttemptsForDeployment>30</RetryAttemptsForDeployment>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <StartupObject>WebApp.Program</StartupObject>
+    <UserSecretsId>72cff7a4-ae71-4fe4-ae5d-9137b588e788</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="src\app\DynamicComponent\AppComponent.ts" />
+    <None Remove="src\globals.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\app\NewFolder\" />
+    <Folder Include="src\app\Service\" />
+    <Folder Include="src\NewFolder\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\DynamicComponent\AppComponent.ts" />
+    <TypeScriptCompile Include="src\app\DynamicComponent\service.service.ts" />
+    <TypeScriptCompile Include="src\app\Enums.ts" />
+    <TypeScriptCompile Include="src\globals.ts" />
+  </ItemGroup>
+  
+  <!--<Target Name="Build Angular" Condition="'$(Configuration)'=='Release'" BeforeTargets="Build">
+    <Message Text="* * * * * * Building Angular App * * * * * *" Importance="high" />
+    <Exec Command="ng build -prod -aot" />
+  </Target>-->
+
+</Project>

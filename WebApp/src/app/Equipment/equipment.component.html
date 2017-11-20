@@ -1,0 +1,27 @@
+<h2>Euipment</h2>
+<ul class="equipment">
+  <li *ngFor="let equipment of equipments" (click)="onSelect(equipment)" 
+      [class.selected]="equipment === selectedEquipment">
+    <span class="badge">{{equipment.id}}</span>
+    <span>{{equipment.assetNumber}} :: {{equipment.name}}</span>
+    <button class="delete"
+            (click)="delete(equipment); $event.stopPropagation()">
+      x
+    </button>
+    <button class="edit" [routerLink]="['/edit/equipment',equipment.equipmentItemId]" ><!--[routerLink]="['/edit/equipment',equipment.id]"-->
+      Edit
+    </button>
+  </li>
+</ul>
+<div *ngIf="selectedEquipment">
+  <h2>
+    {{selectedEquipment.name | uppercase}} is my hero
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
+<div>
+  <label>Equipment name:</label> <input #EquipmentName />
+  <button (click)="add(equipmentName.value); equipmentName.value=''">
+    Add
+  </button>
+</div>
