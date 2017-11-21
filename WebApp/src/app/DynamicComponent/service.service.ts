@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver,  Injectable,  Inject,  ReflectiveInjector} from '@angular/core'
 import { DynamicComponent } from './dynamic.component'
-import { TextBoxComponent } from "../Common/text-box/text-box.component";
+import { TextBoxComponent } from "../Common/DynamicComponent3/text-box.component";
 
 @Injectable()
 export class Service {

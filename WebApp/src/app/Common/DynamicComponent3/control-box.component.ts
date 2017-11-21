@@ -1,48 +1,43 @@
 import { Component, Input, AfterViewInit, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
-import { ControlItem } from "./control-item";
-import { ControlDirective } from "./Control.directive";
-import { ControlComponent } from "./Control.component";
+import { ControlItem } from './control-item';
+import { ControlDirective } from './control.directive';
+import { ControlComponent } from './control.component';
 
 
 @Component({
-  selector: 'app-add-banner',
+  selector: 'control-box',
   template: `
-              <div class="ad-banner">
-                <h3>Advertisements</h3>
-                <ng-template ad-host></ng-template>
+              <div class="cntrl-box">
+                <h3>Module Controls</h3>
+                <ng-template control-host></ng-template>
               </div>
             `
 })
 export class ControlBoxComponent implements AfterViewInit {
 
- @Input() cntrls: ControlItem[];  
-  @ViewChild(ControlDirective) adHost: ControlDirective;
+ @Input() controls: ControlItem[];  
+  @ViewChild(ControlDirective) controlHost: ControlDirective;
   subscription: any;
   
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngAfterViewInit() {
-    this.loadComponent();
-    this.getAds();
+    this.loadComponent();    
   }
   
 
   loadComponent() {   
     
-    for (let controlItem of this.cntrls) {
+    for (let controlItem of this.controls) {
    
       let componentFactory = this.componentFactoryResolver.resolveComponentFactory(controlItem.component);
-      let viewContainerRef = this.adHost.viewContainerRef;
+      let viewContainerRef = this.controlHost.viewContainerRef;
       let componentRef = viewContainerRef.createComponent(componentFactory);
       (<ControlComponent>componentRef.instance).data = controlItem.data;
 
     }   
   }
 
-  getAds() {
-    
-      this.loadComponent();
-   
-  }
+  
 }

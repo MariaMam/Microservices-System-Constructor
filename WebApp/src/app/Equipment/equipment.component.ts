@@ -24,9 +24,7 @@ export class EquipmentComponent implements OnInit {
 
   getEquipment(): void {
 
-    //this.equipmentService.getEquipmentItemsJson().then(response => this.selectedHero = response);
-    this.equipmentService.getEquipmentItems().subscribe(data => {
-      console.log(data);
+    this.equipmentService.getEquipmentItems().subscribe(data => {      
       this.equipments = data;
     });
 

@@ -32,12 +32,10 @@ export class EditComponent implements OnInit {
     constructor(private equipmentService: EquipmentService,
         private route: ActivatedRoute,
         private location: Location,
-        @Inject(Service) service,
-        @Inject(AdService) service2,
-        viewContainerRef: ViewContainerRef, private adService: AdService, private controlService: ControlService) {
+       //// @Inject(ControlService) controlService,      
+        viewContainerRef: ViewContainerRef, private adService: AdService,private controlService: ControlService) {
 
-      this.service = service
-      this.service2 = service2
+      this.service = ControlService;
       this.viewContainerRef = viewContainerRef;
     }
    
@@ -47,8 +45,8 @@ export class EditComponent implements OnInit {
             .switchMap((params: ParamMap) => this.equipmentService.getEquipmentItem(params.get('id')))
             .subscribe(equipment => this.equipment = equipment);
 
-        this.service.setRootViewContainerRef(this.viewContainerRef)
-        this.service.addDynamicComponent(31)
+        //this.service.setRootViewContainerRef(this.viewContainerRef)
+        //this.service.addDynamicComponent(31)
         this.ads = this.adService.getAds();
         this.controls = this.controlService.getControls();
     }

@@ -8,8 +8,7 @@ export class ControlService {
   getControls() {
     return [
       new ControlItem(TextBoxComponent, {label: 'mylabel', value: 'Brave as they come'}),
-
-      new ControlItem(TextBoxComponent, { label: 'mylabel2', value: 'Smart as they come'})
+      new ControlItem(TextBoxComponent, {label: 'mylabel2', value: 'Smart as they come'})
     ];
   }
 }
