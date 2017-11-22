@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EquipmentAPIService", "Equi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "APIGateway\APIGateway.csproj", "{377A32BD-8A42-4DE6-9329-08FA3A8EA4CB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModulesConfiguration", "ModulesConfiguration\ModulesConfiguration.csproj", "{8147552D-3323-4694-AD51-0D5CFB5FDA2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleConfiguration", "ModulesConfiguration\ModuleConfiguration.csproj", "{8147552D-3323-4694-AD51-0D5CFB5FDA2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

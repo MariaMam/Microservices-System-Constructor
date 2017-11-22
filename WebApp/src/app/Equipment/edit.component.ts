@@ -9,6 +9,7 @@ import { AdItem } from "../DynamicComponent2/ad-item";
 import { Service } from "../DynamicComponent/service.service";
 import { ControlService } from "../Common/DynamicComponent3/control.service";
 import { AdService } from "../DynamicComponent2/ad.service";
+import { Module } from "../../app.enum";
 
 
 
@@ -47,8 +48,8 @@ export class EditComponent implements OnInit {
 
         //this.service.setRootViewContainerRef(this.viewContainerRef)
         //this.service.addDynamicComponent(31)
-        this.ads = this.adService.getAds();
-        this.controls = this.controlService.getControls();
+       // this.ads = this.adService.getAds();
+        this.controls = this.controlService.getControls(Module.Equipment);
     }
 
     goBack(): void {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ using APIGateway.Requests;
 namespace APIGateway.Controllers
 {
     [Route("api/[controller]")]
-    public class EquipmentController : Controller
+    public class ModuleConfigController : Controller
     {
        
       

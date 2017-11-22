@@ -1,5 +1,3 @@
-module app {
-
     //#region enums
 
     export enum DataType {
@@ -232,4 +230,3 @@ module app {
 
     //#endregion
 
-}

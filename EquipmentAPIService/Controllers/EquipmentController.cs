@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +11,8 @@ using EquipmentAPIService.NewFolder;
 
 namespace EquipmentAPIService.Controllers
 {
-    [Route("api/[controller]")]
+  [ApiVersion("1")]
+  [Route("api/[controller]")]
     public class EquipmentController : Controller
     {
         public EquipmentController(IEquipmentRepository equipmentItems)
@@ -35,8 +36,15 @@ namespace EquipmentAPIService.Controllers
             
         }
 
-        // POST api/values
-        [HttpPost]
+
+    [HttpGet]
+    public TblEquipmentItem GetModuleConfig()
+    {
+      return EquipmentItems.GetAll().FirstOrDefault();
+
+    }
+    // POST api/values
+    [HttpPost]
         public void Post([FromBody]string value)
         {
         }

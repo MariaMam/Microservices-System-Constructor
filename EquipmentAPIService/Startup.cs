@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,47 +23,47 @@ namespace EquipmentAPIService
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            //var connection = @"Server=MMPC\MMSERVER;Database=EquipmentDB;Trusted_Connection=True;";
-            //services.AddDbContext<EquipmentDBContext>(options => options.UseSqlServer(connection));
-
-            services.AddCors(o => o.AddPolicy("EquipmentPolicy", builder =>
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+      //var connection = @"Server=MMPC\MMSERVER;Database=EquipmentDB;Trusted_Connection=True;";
+      //services.AddDbContext<EquipmentDBContext>(options => options.UseSqlServer(connection));
+      services.AddApiVersioning();
+      services.AddCors(o => o.AddPolicy("EquipmentPolicy", builder =>
             {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
+              builder.AllowAnyOrigin()
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
             }));
-            services.AddScoped<IEquipmentRepository, EquipmentRepository>();
-            
-            services.AddDbContext<EquipmentDBContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("EquipmentDB"));
+      services.AddScoped<IEquipmentRepository, EquipmentRepository>();
 
-                
-                /*options.UseSqlServer(Configuration["ConnectionString"],
-                sqlServerOptionsAction: sqlOptions =>
-                {
-                    sqlOptions.
-                                MigrationsAssembly(
-                                    typeof(Startup).
-                                         GetTypeInfo().
-                                            Assembly.
-                                                 GetName().Name);
-                    //Configuring Connection Resiliency:
-                    sqlOptions.
-                    EnableRetryOnFailure(maxRetryCount: 5,
-                    maxRetryDelay: TimeSpan.FromSeconds(30),
-                    errorNumbersToAdd: null);
-                });*/
-                // Changing default behavior when client evaluation occurs to throw.
-                // Default in EFCore would be to log warning when client evaluation is done.
-                options.ConfigureWarnings(warnings => warnings.Throw(
-                RelationalEventId.QueryClientEvaluationWarning));
-            });
-            services.AddMvc();
-        }
+      services.AddDbContext<EquipmentDBContext>(options =>
+      {
+        options.UseSqlServer(Configuration.GetConnectionString("EquipmentDB"));
+
+
+              /*options.UseSqlServer(Configuration["ConnectionString"],
+              sqlServerOptionsAction: sqlOptions =>
+              {
+                  sqlOptions.
+                              MigrationsAssembly(
+                                  typeof(Startup).
+                                       GetTypeInfo().
+                                          Assembly.
+                                               GetName().Name);
+                  //Configuring Connection Resiliency:
+                  sqlOptions.
+                  EnableRetryOnFailure(maxRetryCount: 5,
+                  maxRetryDelay: TimeSpan.FromSeconds(30),
+                  errorNumbersToAdd: null);
+              });*/
+              // Changing default behavior when client evaluation occurs to throw.
+              // Default in EFCore would be to log warning when client evaluation is done.
+              options.ConfigureWarnings(warnings => warnings.Throw(
+              RelationalEventId.QueryClientEvaluationWarning));
+      });
+      services.AddMvc();
+    }
     
    
 
