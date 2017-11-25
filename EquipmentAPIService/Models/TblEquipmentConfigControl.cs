@@ -15,7 +15,7 @@ namespace EquipmentAPIService.Models
         public int OrderId { get; set; }
         public string ControlId { get; set; }
         public string ControlPath { get; set; }
-        public bool? IsHidden { get; set; }
+        public bool IsHidden { get; set; }
         public bool IsReportable { get; set; }
 
         public TblEquipmentModel EquipmentModel { get; set; }

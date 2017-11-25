@@ -12,8 +12,10 @@ using APIGateway.Requests;
 
 namespace APIGateway.Controllers
 {
+
     [Route("api/[controller]")]
-    public class ModuleConfigController : Controller
+    [ApiVersion("1.0")]
+    public class EquipmentController : Controller
     {
        
       
@@ -22,14 +24,14 @@ namespace APIGateway.Controllers
         [EnableCors("APIGatewayPolicy")]
         public string Get()
         {            
-            return EquipmentRequests.GetAllEquipment().Result;
+            return EquipmentRequests.GetAllEquipment("1.0").Result;
         }
 
         [HttpGet("{id}")]
         [EnableCors("APIGatewayPolicy")]
         public string Get(Guid id)
         {
-            return EquipmentRequests.Get(id).Result;
+            return EquipmentRequests.Get(id, "1.0").Result;
 
         }
 

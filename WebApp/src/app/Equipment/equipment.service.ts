@@ -9,31 +9,24 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class EquipmentService {
 
-    private equipmentUrl = 'http://localhost:49983/api/equipment';///api/equipment';
+  private equipmentUrl = 'http://localhost:49983/api/equipment'
+  apiVerison = 'api-version=1.0';
     results: string;
     jsonresults: JSON;
     resultsEquipment: EquipmentItem[];
     constructor(private http: HttpClient) { }    
         
-        /* return this.http.get(this.equipmentUrl)
-            .toPromise()
-            .then(response => response.json.toString())
-            .catch(this.handleError);
-
-       return this.http.get(this.equipmentUrl)
-            .toPromise()
-            .then(response => response.json().data as EquipmentItem[])
-            .catch(this.handleError);*/
-
 
     getEquipmentItems(): Observable<EquipmentItem[]>{
 
-      return this.http.get<EquipmentItem[]>(this.equipmentUrl)
+      const url = `${this.equipmentUrl}?${this.apiVerison}`;
+      return this.http.get<EquipmentItem[]>(url)
         
     }
 
     getEquipmentItems2(): Promise<EquipmentItem[]> {             
-        var eq;
+      var eq;
+      const url = `${this.equipmentUrl}?${this.apiVerison}`;
         var a = this.http.get(this.equipmentUrl).toPromise()         
             .then(res => {
                 res as EquipmentItem[];
@@ -46,7 +39,7 @@ export class EquipmentService {
     }    
 
     getEquipmentItem(equipmentItemId: string): Observable<EquipmentEditItem>  {
-      const url = `${this.equipmentUrl}/${equipmentItemId}`;
+      const url = `${this.equipmentUrl}/${equipmentItemId}? ${this.apiVerison }`;
 
       return this.http.get<EquipmentEditItem>(url)
     }

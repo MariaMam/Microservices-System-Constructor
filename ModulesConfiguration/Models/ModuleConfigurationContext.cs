@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -6,7 +6,10 @@ namespace ModuleConfiguration.Models
 {
     public partial class ModuleConfigurationContext : DbContext
     {
-        public virtual DbSet<TblEmexModule> TblEmexModule { get; set; }
+
+    public ModuleConfigurationContext(DbContextOptions<ModuleConfigurationContext> options)    : base(options){ }
+
+    public virtual DbSet<TblEmexModule> TblEmexModule { get; set; }
         public virtual DbSet<TblModuleConfig> TblModuleConfig { get; set; }
         public virtual DbSet<TblModuleControlConfig> TblModuleControlConfig { get; set; }
         public virtual DbSet<TblModuleControlRule> TblModuleControlRule { get; set; }
@@ -17,15 +20,6 @@ namespace ModuleConfiguration.Models
         public virtual DbSet<TblModuleRule> TblModuleRule { get; set; }
         public virtual DbSet<TblModuleRuleMatrix> TblModuleRuleMatrix { get; set; }
         public virtual DbSet<TblModuleSectionConfig> TblModuleSectionConfig { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Server=MMPC\MMSERVER;Database=ModuleConfiguration;Trusted_Connection=True;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -9,10 +9,10 @@ namespace APIGateway.Requests
 {
     public class ModuleConfigRequests
   {
-        static string Url = "http://localhost:61944/api/equipment";
+        static string Url = "http://localhost:62748/api/moduleconfiguration";
 
 
-        public static async Task<string> GetAllEquipment()
+        public static async Task<string> GetAll()
         {
             var client = new HttpClient();
             /*client.DefaultRequestHeaders.Accept.Clear();
@@ -24,7 +24,7 @@ namespace APIGateway.Requests
             
         }
 
-        public static async Task<string> Get(Guid id)
+        public static async Task<string> GetModuleConfigByModule(string module, string version)
         {
             var client = new HttpClient();
             /*client.DefaultRequestHeaders.Accept.Clear();
@@ -32,7 +32,7 @@ namespace APIGateway.Requests
                 new MediaTypeWithQualityHeaderValue(Url));
             client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");*/
 
-            return await client.GetStringAsync(Url+"/"+id);
+            return await client.GetStringAsync(Url+ "/GetByModule?module=" + module+"&"+version);
 
         }
     }

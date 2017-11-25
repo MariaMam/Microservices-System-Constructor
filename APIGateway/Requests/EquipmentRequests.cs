@@ -10,21 +10,21 @@ namespace APIGateway.Requests
   public class EquipmentRequests
   {
     static string Url = "http://localhost:61944/api/equipment";
+    static string versionParm = "api-version=";
 
-
-    public static async Task<string> GetAllEquipment()
+    public static async Task<string> GetAllEquipment(string version)
     {
       var client = new HttpClient();
       /*client.DefaultRequestHeaders.Accept.Clear();
       client.DefaultRequestHeaders.Accept.Add(
           new MediaTypeWithQualityHeaderValue(Url));
       client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");*/
-
-      return await client.GetStringAsync(Url);
+      var urlGet = Url + "?"+versionParm +version;
+      return await client.GetStringAsync(urlGet);
 
     }
 
-    public static async Task<string> Get(Guid id)
+    public static async Task<string> Get(Guid id, string version)
     {
       var client = new HttpClient();
       /*client.DefaultRequestHeaders.Accept.Clear();
@@ -32,19 +32,7 @@ namespace APIGateway.Requests
           new MediaTypeWithQualityHeaderValue(Url));
       client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");*/
 
-      return await client.GetStringAsync(Url + "/" + id);
-
-    }
-
-    public static async Task<string> GetModuleConfiguration()
-    {
-      var client = new HttpClient();
-      /*client.DefaultRequestHeaders.Accept.Clear();
-      client.DefaultRequestHeaders.Accept.Add(
-          new MediaTypeWithQualityHeaderValue(Url));
-      client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");*/
-      var moduleconfig = "http://localhost:61944/api/equipment/getmoduleconfig";
-      return await client.GetStringAsync(Url);
+      return await client.GetStringAsync(Url + "/" + id+ "?"+versionParm + version);
 
     }
   }

@@ -10,8 +10,10 @@ import { DataType } from "../../../app.enum";
 @Injectable()
 export class ControlService {
   private moduleConfigUrl = 'http://localhost:49983/api/moduleconfiguration';///api/equipment';
+  apiVerison = 'api-version=1.0';
   controlItems: ControlItemModel[];
   controlComponents: ControlItem[];
+
   constructor(private http: HttpClient) { }  
 
   getControls(module: number) {    
@@ -22,7 +24,7 @@ export class ControlService {
 
       return this.controlComponents = this.controlItems.map(o => {
 
-        if (o.type == DataType.String) {          
+        if (o.data.DataType == DataType.String) {          
 
           return new ControlItem(TextBoxComponent, { label: o.data.label, value: o.data.value })
 
@@ -39,12 +41,10 @@ export class ControlService {
 
 
   getConfiguration(module: number): Observable<ControlItemModel[]> {
-
-    const url = `${this.moduleConfigUrl}/${module}`;
+    
+    const url = `${this.moduleConfigUrl}` + '\GetByModule?module=' + `${module}&${this.apiVerison}`;
     //var a = this.http.get<ControlItemModel[]>(url).switchMap();
     return this.http.get<ControlItemModel[]>(url);
-
-    
 
   }
 }
