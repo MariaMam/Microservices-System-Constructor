@@ -17,5 +17,6 @@ export class EquipmentEditItem extends EquipmentItem {
     adressCountry: string;
     adressCity: string;
     adressArealText: string;
-    adressDistrictText: string   
+    adressDistrictText: string
+    EquipmentItemId: string;
 }

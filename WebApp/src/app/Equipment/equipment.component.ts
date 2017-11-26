@@ -28,7 +28,6 @@ export class EquipmentComponent implements OnInit {
       this.equipments = data;
     });
 
-
   }
 
   getModuleConfiguration() {

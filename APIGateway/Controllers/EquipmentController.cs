@@ -24,14 +24,14 @@ namespace APIGateway.Controllers
         [EnableCors("APIGatewayPolicy")]
         public string Get()
         {            
-            return EquipmentRequests.GetAllEquipment("1.0").Result;
+            return EquipmentRequests.GetAllEquipment("api-version=1.0").Result;
         }
 
         [HttpGet("{id}")]
         [EnableCors("APIGatewayPolicy")]
-        public string Get(Guid id)
+        public string Get(string id)
         {
-            return EquipmentRequests.Get(id, "1.0").Result;
+            return EquipmentRequests.Get(id, "api-version=1.0").Result;
 
         }
 

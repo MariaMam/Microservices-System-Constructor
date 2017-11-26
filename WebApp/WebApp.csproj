@@ -16,8 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src\app\NewFolder\" />
-    <Folder Include="src\app\Service\" />
+    <Folder Include="src\app\ConfigBuilder\NewFolder\" />
     <Folder Include="src\NewFolder\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

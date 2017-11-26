@@ -21,6 +21,13 @@ namespace APIGateway
       return json;
     }
 
+    public static JObject ParseResponseObject(string configs)
+    {
+
+      var json = JObject.Parse(configs);
+      return json;
+    }
+
 
   }
 }

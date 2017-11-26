@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using EquipmentAPIService.Models;
 using Microsoft.AspNetCore.Cors;
 using EquipmentAPIService.NewFolder;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -31,9 +33,9 @@ namespace EquipmentAPIService.Controllers
     // GET api/values/5
     [HttpGet("{id}")]
     [EnableCors("EquipmentPolicy")]
-    public TblEquipmentItem Get(Guid id)
+    public string Get(Guid id)
     {
-      return EquipmentItems.FindByID(id);
+      return JsonConvert.SerializeObject(EquipmentItems.FindByID(id));
 
     }
     // POST api/values

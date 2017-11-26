@@ -16,6 +16,7 @@ export class ControlService {
   controlItems: ControlItemModel[];
   controlComponents: ControlItem[];
 
+
   constructor(private http: HttpClient) { }
 
   /*return [
@@ -32,11 +33,11 @@ export class ControlService {
 
   }
 
-  getControlValues(columnNames: Column): Observable<ControlItemModel[]> {
+  getControlConfigurationWithValues(module: number, entityId:string): Observable<ControlItemModel[]> {
 
-
-    const url = `${this.moduleConfigUrl}/` + 'GetByModule?module=' + `${module}&${this.apiVerison}`;
+    const url = `${this.moduleConfigUrl}/` + 'GetCntrlsWithValues?module=' + `${module}&` + "entityId=" + entityId +`&${this.apiVerison}`;
     return this.http.get<ControlItemModel[]>(url)
+
   }
 }
 

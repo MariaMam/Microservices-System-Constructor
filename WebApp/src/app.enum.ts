@@ -133,6 +133,9 @@
         Asset = 30,
         Equipment =31
     }
+export enum ConfigurableModule {  
+  Equipment = 31
+}
 
     export enum Operator {
         Equal = 0,

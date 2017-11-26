@@ -19,20 +19,20 @@ namespace APIGateway.Requests
       client.DefaultRequestHeaders.Accept.Add(
           new MediaTypeWithQualityHeaderValue(Url));
       client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");*/
-      var urlGet = Url + "?"+versionParm +version;
+      var urlGet = Url + "?"+version;
       return await client.GetStringAsync(urlGet);
 
     }
 
-    public static async Task<string> Get(Guid id, string version)
+    public static async Task<string> Get(string id, string version)
     {
       var client = new HttpClient();
       /*client.DefaultRequestHeaders.Accept.Clear();
       client.DefaultRequestHeaders.Accept.Add(
           new MediaTypeWithQualityHeaderValue(Url));
       client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");*/
-
-      return await client.GetStringAsync(Url + "/" + id+ "?"+versionParm + version);
+      var url = Url + "/" + id + "?" + version;
+      return await client.GetStringAsync(url);
 
     }
   }

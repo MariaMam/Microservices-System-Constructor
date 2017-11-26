@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using APIGateway.Models.Configuration;
 using Newtonsoft.Json.Linq;
+using APIGateway.ServiceClasses;
 
 namespace APIGateway.Controllers
 {
@@ -41,20 +42,26 @@ namespace APIGateway.Controllers
 
     [HttpGet("GetCntrlsWithValues")]
     [EnableCors("APIGatewayPolicy")]
-    public string GetCntrlsWithValues(string module)
+    public string GetCntrlsWithValues(string module, string entityId)
     {
       switch (module)
       {
         case "31":
-           var configs = ModuleConfigRequests.GetCntrlsWithValues("Equipment", "api-version=1.0");
+          var configs = ModuleConfigRequests.GetCntrlsWithValues("Equipment", "api-version=1.0");
           // var msg = await configs;
-          JArray json = ConfigurationParser.ParseResponse(configs.Result);       
-          foreach(var c in json)
+          JArray json = ConfigurationParser.ParseResponse(configs.Result);
+          for (int i = 0; i < json.Count; i++)
           {
-            
+            Console.WriteLine(json[0]);
+            Column column = new Column(json[0]["columnName"].ToString());
+            if (column.TableName == "TBL_EquipmentItem")
+            {
+              var record = ConfigurationParser.ParseResponseObject(EquipmentRequests.Get(entityId, "api-version=1.0").Result);
+              json[i]["value"] = record[column.ColumnName];
+            }
 
-          }          
-          return ModuleConfigRequests.GetCntrlsWithValues("Equipment", "api-version=1.0").ToString();
+          }
+          return json.ToString();
 
         default:
           return "Bad Request";

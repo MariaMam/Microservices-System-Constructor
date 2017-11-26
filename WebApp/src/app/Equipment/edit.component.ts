@@ -27,6 +27,9 @@ export class EditComponent implements OnInit {
   ads: AdItem[];
   controls: ControlItem[];
   columnNames: Column[];
+  id: string;
+  val: any;
+
 
   @ViewChild('dynamic', {
     read: ViewContainerRef
@@ -47,31 +50,31 @@ export class EditComponent implements OnInit {
     var columnsWithValue;
     this.route.paramMap
       .switchMap((params: ParamMap) => this.equipmentService.getEquipmentItem(params.get('id')))
-      .subscribe(equipment => this.equipment = equipment);
+      .subscribe(equipment => {
+        this.equipment = equipment
+        this.updateFields()
+        
+      });
+  }
+ 
+  
+  //this.service.setRootViewContainerRef(this.viewContainerRef)
+  //this.service.addDynamicComponent(31)
+  // this.ads = this.adService.getAds();
+  //this.controls = this.controlService.getControls(Module.Equipment);
 
-    //this.service.setRootViewContainerRef(this.viewContainerRef)
-    //this.service.addDynamicComponent(31)
-    // this.ads = this.adService.getAds();
-    //this.controls = this.controlService.getControls(Module.Equipment);
-    this.controlService.getConfiguration(Module.Equipment).subscribe(data => {
+  updateFields(): void {
+    
+    this.controlService.getControlConfigurationWithValues(Module.Equipment, this.equipment.EquipmentItemId).subscribe(data => {
       var controlItems = data
       console.log(controlItems);
-
-      this.columnNames = controlItems.map(o => {
-        o.data = o;
-        if (o.data.dataType == DataType.String && !o.data.isCustomField) {
-          return new Column(o.data.columnName);
-        }
-      }
-      )
-
-
-
+      
       this.controls = controlItems.map(o => {
-        o.data = o;
-        if (o.data.dataType == DataType.String && !o.data.isCustomField) {
+        this.val = o;
+       
+        if (this.val.dataType == DataType.String && !this.val.isCustomField) {
 
-          return new ControlItem(TextBoxComponent, { label: o.data.columnName })
+          return new ControlItem(TextBoxComponent, { label: this.val.columnName, value: this.val.value })
 
         }
       }
@@ -84,16 +87,7 @@ export class EditComponent implements OnInit {
     this.location.back();
   }
 
-
-
-
-
 }
-
-    /*save(): void {
-        this.equipmentService.update(this.equipment)
-            .then(() => this.goBack());
-    }*/
 
 
 

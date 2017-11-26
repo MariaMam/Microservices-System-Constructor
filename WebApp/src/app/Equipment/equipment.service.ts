@@ -39,7 +39,7 @@ export class EquipmentService {
     }    
 
     getEquipmentItem(equipmentItemId: string): Observable<EquipmentEditItem>  {
-      const url = `${this.equipmentUrl}/${equipmentItemId}? ${this.apiVerison }`;
+      const url = `${this.equipmentUrl}/${equipmentItemId}?${this.apiVerison }`;
 
       return this.http.get<EquipmentEditItem>(url)
     }
