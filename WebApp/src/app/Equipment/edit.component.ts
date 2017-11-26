@@ -16,7 +16,7 @@ import { Column } from "../../column-name";
 
 @Component({
   selector: 'my-edit',
-    templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html'
 })
 
 export class EditComponent implements OnInit {
@@ -28,68 +28,67 @@ export class EditComponent implements OnInit {
   controls: ControlItem[];
   columnNames: Column[];
 
-    @ViewChild('dynamic', {
-      read: ViewContainerRef
-    }) viewContainerRef: ViewContainerRef
+  @ViewChild('dynamic', {
+    read: ViewContainerRef
+  }) viewContainerRef: ViewContainerRef
 
-    constructor(private equipmentService: EquipmentService,
-        private route: ActivatedRoute,
-        private location: Location,
-       //// @Inject(ControlService) controlService,      
-        viewContainerRef: ViewContainerRef, private adService: AdService,private controlService: ControlService) {
+  constructor(private equipmentService: EquipmentService,
+    private route: ActivatedRoute,
+    private location: Location,
+    //// @Inject(ControlService) controlService,      
+    viewContainerRef: ViewContainerRef, private adService: AdService, private controlService: ControlService) {
 
-      this.service = ControlService;
-      this.viewContainerRef = viewContainerRef;
-    }
-   
-    ngOnInit(): void {
-      var a = this.route.paramMap;
-      var columnsWithValue;
-      this.route.paramMap
-        .switchMap((params: ParamMap) => this.equipmentService.getEquipmentItem(params.get('id')))
-        .subscribe(equipment => this.equipment = equipment);
+    this.service = ControlService;
+    this.viewContainerRef = viewContainerRef;
+  }
 
-      //this.service.setRootViewContainerRef(this.viewContainerRef)
-      //this.service.addDynamicComponent(31)
-      // this.ads = this.adService.getAds();
-      //this.controls = this.controlService.getControls(Module.Equipment);
-      this.controlService.getConfiguration(Module.Equipment).subscribe(data => {
-        var controlItems = data
-        console.log(controlItems);
+  ngOnInit(): void {
+    var a = this.route.paramMap;
+    var columnsWithValue;
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.equipmentService.getEquipmentItem(params.get('id')))
+      .subscribe(equipment => this.equipment = equipment);
 
-        this.columnNames = controlItems.map(o => {
-          o.data = o;
-          if (o.data.dataType == DataType.String && !o.data.isCustomField) {
-            return new ColumnName(o.data.columnName);
-          }
+    //this.service.setRootViewContainerRef(this.viewContainerRef)
+    //this.service.addDynamicComponent(31)
+    // this.ads = this.adService.getAds();
+    //this.controls = this.controlService.getControls(Module.Equipment);
+    this.controlService.getConfiguration(Module.Equipment).subscribe(data => {
+      var controlItems = data
+      console.log(controlItems);
+
+      this.columnNames = controlItems.map(o => {
+        o.data = o;
+        if (o.data.dataType == DataType.String && !o.data.isCustomField) {
+          return new Column(o.data.columnName);
         }
-        )
-
-        
-
-        this.controls = controlItems.map(o => {
-          o.data = o;
-          if (o.data.dataType == DataType.String && !o.data.isCustomField ) {
-           
-            return new ControlItem(TextBoxComponent, { label: o.data.columnName })
-
-          }
-        }
-        )
-      });
-      
-        }
-
-    goBack(): void {
-          this.location.back();
-        }
-
-    ngOnChanges(changes: SimpleChanges) {
-
-     
       }
-     
-    }
+      )
+
+
+
+      this.controls = controlItems.map(o => {
+        o.data = o;
+        if (o.data.dataType == DataType.String && !o.data.isCustomField) {
+
+          return new ControlItem(TextBoxComponent, { label: o.data.columnName })
+
+        }
+      }
+      )
+    });
+
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+
+
+
+
+}
 
     /*save(): void {
         this.equipmentService.update(this.equipment)
@@ -97,4 +96,4 @@ export class EditComponent implements OnInit {
     }*/
 
 
-}
+
