@@ -31,6 +31,13 @@ export class EquipmentComponent implements OnInit {
 
   }
 
+  getModuleConfiguration() {
+
+
+
+
+  }
+
   ngOnInit(): void {
       this.getEquipment();
   }

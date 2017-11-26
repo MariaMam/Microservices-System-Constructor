@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using APIGateway.Requests;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using APIGateway.Models.Configuration;
+using Newtonsoft.Json.Linq;
 
 namespace APIGateway.Controllers
 {
@@ -25,9 +29,37 @@ namespace APIGateway.Controllers
     [EnableCors("APIGatewayPolicy")]
     public string Get(string module)
     {
-      return ModuleConfigRequests.GetModuleConfigByModule(module, "api-version=1.0").Result;
+      switch (module)
+      {
+        case "31":
+          return ModuleConfigRequests.GetModuleConfigByModule("Equipment", "api-version=1.0").Result;
+        default:
+          return "Bad Request";
+          break;
+      }
+    }
 
+    [HttpGet("GetCntrlsWithValues")]
+    [EnableCors("APIGatewayPolicy")]
+    public string GetCntrlsWithValues(string module)
+    {
+      switch (module)
+      {
+        case "31":
+           var configs = ModuleConfigRequests.GetCntrlsWithValues("Equipment", "api-version=1.0");
+          // var msg = await configs;
+          JArray json = ConfigurationParser.ParseResponse(configs.Result);       
+          foreach(var c in json)
+          {
+            
 
+          }          
+          return ModuleConfigRequests.GetCntrlsWithValues("Equipment", "api-version=1.0").ToString();
+
+        default:
+          return "Bad Request";
+          break;
+      }
     }
 
     // GET api/values/5

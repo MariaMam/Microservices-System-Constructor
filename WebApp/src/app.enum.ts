@@ -228,5 +228,9 @@
         WarningNote = 999
     }
 
+export enum TableToModule {
+  TBL_Equipment = 31,
+}
+
     //#endregion
 

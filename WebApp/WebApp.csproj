@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="src\app\DynamicComponent\AppComponent.ts" />
+    <None Remove="src\column-name.ts" />
     <None Remove="src\globals.ts" />
   </ItemGroup>
 
@@ -37,6 +38,8 @@
     <TypeScriptCompile Include="src\app\DynamicComponent\AppComponent.ts" />
     <TypeScriptCompile Include="src\app\DynamicComponent\service.service.ts" />
     <TypeScriptCompile Include="src\app\Enums.ts" />
+    <TypeScriptCompile Include="src\app\column-name.ts" />
+    <TypeScriptCompile Include="src\column-name.ts" />
     <TypeScriptCompile Include="src\globals.ts" />
   </ItemGroup>
   

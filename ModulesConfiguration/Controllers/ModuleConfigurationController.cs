@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using ModuleConfiguration.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,11 +25,19 @@ namespace ModuleConfiguration.Controllers
       ControlConfigs = controlConfigs;
     }
 
-    [HttpGet("GetByModule")]
+    /*[HttpGet("GetByModule")]
     [EnableCors("ModueConfigurationPolicy")]
     public List<TblModuleControlConfig> Get(string module)
     {
       return ControlConfigs.GetforModule(module);
+
+    }*/
+
+    [HttpGet("GetByModule")]
+    [EnableCors("ModueConfigurationPolicy")]
+    public string Get(string module)
+    {
+      return JsonConvert.SerializeObject(ControlConfigs.GetforModule(module));
 
     }
 

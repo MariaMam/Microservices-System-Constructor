@@ -36,7 +36,7 @@ namespace ModuleConfiguration.Models
 
       List<Guid> moduleConfigGroupsId = _context.TblModuleGroupConfig.Where(b => b.ModuleConfigId == moduleConfigId).Select(b=>b.ModuleGroupConfigId).ToList();
 
-      List<TblModuleControlConfig> controls = _context.TblModuleControlConfig.Where(b => moduleConfigGroupsId.Contains(b.ModuleGroupConfigId)).ToList();
+      List<TblModuleControlConfig> controls = (_context.TblModuleControlConfig.Where(b => moduleConfigGroupsId.Contains(b.ModuleGroupConfigId))).ToList();
 
       return controls;
     }

@@ -5,6 +5,8 @@ import { Observable } from "rxjs/Observable";
 import { ControlItemModel } from "./module-control";
 import { HttpClient } from "@angular/common/http";
 import { DataType } from "../../../app.enum";
+import { Column } from "../../../column-name";
+
 
 
 @Injectable()
@@ -14,37 +16,28 @@ export class ControlService {
   controlItems: ControlItemModel[];
   controlComponents: ControlItem[];
 
-  constructor(private http: HttpClient) { }  
+  constructor(private http: HttpClient) { }
 
-  getControls(module: number) {    
+  /*return [
+    new ControlItem(TextBoxComponent, {label: 'mylabel', value: 'Brave as they come'}),
+    new ControlItem(TextBoxComponent, {label: 'mylabel2', value: 'Smart as they come'})
+  ];*/
 
-      this.getConfiguration(module).subscribe(data => {      
-      this.controlItems = data;
-    });
-
-      return this.controlComponents = this.controlItems.map(o => {
-
-        if (o.data.DataType == DataType.String) {          
-
-          return new ControlItem(TextBoxComponent, { label: o.data.label, value: o.data.value })
-
-          }
-        
-      });
-
-   
-    /*return [
-      new ControlItem(TextBoxComponent, {label: 'mylabel', value: 'Brave as they come'}),
-      new ControlItem(TextBoxComponent, {label: 'mylabel2', value: 'Smart as they come'})
-    ];*/
-  }
 
 
   getConfiguration(module: number): Observable<ControlItemModel[]> {
-    
-    const url = `${this.moduleConfigUrl}` + '\GetByModule?module=' + `${module}&${this.apiVerison}`;
-    //var a = this.http.get<ControlItemModel[]>(url).switchMap();
+
+    const url = `${this.moduleConfigUrl}/` + 'GetByModule?module=' + `${module}&${this.apiVerison}`;
     return this.http.get<ControlItemModel[]>(url);
 
   }
+
+  getControlValues(columnNames: Column): Observable<ControlItemModel[]> {
+
+
+    const url = `${this.moduleConfigUrl}/` + 'GetByModule?module=' + `${module}&${this.apiVerison}`;
+    return this.http.get<ControlItemModel[]>(url)
+  }
 }
+
+

@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild, ComponentFactoryResolver, OnDestroy, SimpleChanges } from '@angular/core';
 import { ControlItem } from './control-item';
 import { ControlDirective } from './control.directive';
 import { ControlComponent } from './control.component';
@@ -38,6 +38,10 @@ export class ControlBoxComponent implements AfterViewInit {
 
     }   
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.loadComponent();
+    }
 
   
 }

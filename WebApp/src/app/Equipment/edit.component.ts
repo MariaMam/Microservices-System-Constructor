@@ -9,9 +9,10 @@ import { AdItem } from "../DynamicComponent2/ad-item";
 import { Service } from "../DynamicComponent/service.service";
 import { ControlService } from "../Common/DynamicComponent3/control.service";
 import { AdService } from "../DynamicComponent2/ad.service";
-import { Module } from "../../app.enum";
-
-
+import { Module, DataType } from "../../app.enum";
+import { TextBoxComponent } from "../Common/DynamicComponent3/text-box.component";
+import { SimpleChanges } from '@angular/core';
+import { Column } from "../../column-name";
 
 @Component({
   selector: 'my-edit',
@@ -25,6 +26,7 @@ export class EditComponent implements OnInit {
 
   ads: AdItem[];
   controls: ControlItem[];
+  columnNames: Column[];
 
     @ViewChild('dynamic', {
       read: ViewContainerRef
@@ -41,22 +43,54 @@ export class EditComponent implements OnInit {
     }
    
     ngOnInit(): void {
-        var a = this.route.paramMap;
-        this.route.paramMap
-            .switchMap((params: ParamMap) => this.equipmentService.getEquipmentItem(params.get('id')))
-            .subscribe(equipment => this.equipment = equipment);
+      var a = this.route.paramMap;
+      var columnsWithValue;
+      this.route.paramMap
+        .switchMap((params: ParamMap) => this.equipmentService.getEquipmentItem(params.get('id')))
+        .subscribe(equipment => this.equipment = equipment);
 
-        //this.service.setRootViewContainerRef(this.viewContainerRef)
-        //this.service.addDynamicComponent(31)
-       // this.ads = this.adService.getAds();
-        this.controls = this.controlService.getControls(Module.Equipment);
-    }
+      //this.service.setRootViewContainerRef(this.viewContainerRef)
+      //this.service.addDynamicComponent(31)
+      // this.ads = this.adService.getAds();
+      //this.controls = this.controlService.getControls(Module.Equipment);
+      this.controlService.getConfiguration(Module.Equipment).subscribe(data => {
+        var controlItems = data
+        console.log(controlItems);
+
+        this.columnNames = controlItems.map(o => {
+          o.data = o;
+          if (o.data.dataType == DataType.String && !o.data.isCustomField) {
+            return new ColumnName(o.data.columnName);
+          }
+        }
+        )
+
+        
+
+        this.controls = controlItems.map(o => {
+          o.data = o;
+          if (o.data.dataType == DataType.String && !o.data.isCustomField ) {
+           
+            return new ControlItem(TextBoxComponent, { label: o.data.columnName })
+
+          }
+        }
+        )
+      });
+      
+        }
 
     goBack(): void {
-        this.location.back();
+          this.location.back();
+        }
+
+    ngOnChanges(changes: SimpleChanges) {
+
+     
+      }
+     
     }
 
-    
     /*save(): void {
         this.equipmentService.update(this.equipment)
             .then(() => this.goBack());
