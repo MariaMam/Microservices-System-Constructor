@@ -4,11 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
-
-// Imports for loading & configuring the in-memory web api
-//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-//import { InMemoryDataService } from './in-memory-data.service';
-
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { HeroesComponent } from './heroes.component';
@@ -21,24 +16,24 @@ import { EquipmentService} from './Equipment/equipment.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DynamicComponent } from "./DynamicComponent/dynamic.component";
-import { Service } from "./DynamicComponent/Service.service";
-import { TextBoxComponent } from './Common/DynamicComponent3/text-box.component';
 import { AdBannerComponent } from "./DynamicComponent2/ad-banner.component";
 import { HeroJobAdComponent } from "./DynamicComponent2/hero-job-ad.component";
 import { HeroProfileComponent } from "./DynamicComponent2/hero-profile.component";
 import { AdDirective } from "./DynamicComponent2/ad.directive";
 import { AdService } from "./DynamicComponent2/ad.service";
-import { ControlBoxComponent } from './Common/DynamicComponent3/control-box.component';
-import { ControlDirective } from './Common/DynamicComponent3/control.directive';
-import { ControlService } from './Common/DynamicComponent3/control.service';
+import { AdminComponent } from './admin/admin.component';
+import { EditModuleComponent } from './Admin/edit-module/edit-module.component';
+import { ControlBoxComponent } from "./Common/control-box.component";
+import { ControlDirective } from "./Common/control.directive";
+import { TextBoxComponent } from "./Common/text-box.component";
+import { ControlService } from "./Common/control.service";
+import { LabelComponent } from "./Common/label.component";
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        //InMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: true }),
         AppRoutingModule,
         HttpClientModule,        
         BrowserAnimationsModule
@@ -53,18 +48,20 @@ import { ControlService } from './Common/DynamicComponent3/control.service';
         HeroSearchComponent,
         EquipmentComponent,
         MenuComponent,
-        EditComponent,
-        DynamicComponent,        
-        AdBannerComponent,//
+        EditComponent,     
+        AdBannerComponent,
         HeroJobAdComponent,
         HeroProfileComponent,
         AdDirective,
         ControlBoxComponent,
         ControlDirective,
-        TextBoxComponent
+        TextBoxComponent,
+        AdminComponent,
+      EditModuleComponent,
+      LabelComponent
     ],
-    providers: [HeroService, EquipmentService, Service, AdService,ControlService],
+    providers: [HeroService, EquipmentService, AdService,ControlService],
     bootstrap: [AppComponent],
-    entryComponents: [DynamicComponent, TextBoxComponent, HeroJobAdComponent, HeroProfileComponent]
+    entryComponents: [TextBoxComponent, HeroJobAdComponent, HeroProfileComponent, LabelComponent]
 })
 export class AppModule { }

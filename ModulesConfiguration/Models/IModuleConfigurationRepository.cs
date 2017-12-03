@@ -13,5 +13,7 @@ namespace ModuleConfiguration.Models
     void Update(TblModuleControlConfig item);
     List<TblModuleControlConfig> GetforModule(string module);
     List<TblModuleControlConfig> Get();
+    List<TblModuleControlConfigSetting> GetModuleSettings(string module);
+
   }
 }

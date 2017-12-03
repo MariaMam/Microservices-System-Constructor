@@ -42,8 +42,18 @@ namespace APIGateway.Requests
       var client = new HttpClient();
       //return (await client.GetAsync(Url + "/GetByModule?module=" + module + "&" + version)).Content;
 
-      return await client.GetStringAsync(Url + "/GetByModule?module=" + module + "&" + version);
-    
+      return await client.GetStringAsync(Url + "/GetByModule?module=" + module + "&" + version);   
+
+
+    }
+
+    public static async Task<string> GetModuleSettings(string module, string version)
+    {
+      var client = new HttpClient();
+      //return (await client.GetAsync(Url + "/GetByModule?module=" + module + "&" + version)).Content;
+      var localurl = Url + "/GetModuleSettings?module=" + module + "&" + version;
+      var result = await client.GetStringAsync(localurl);    
+      return result;
 
 
     }

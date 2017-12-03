@@ -33,6 +33,8 @@ namespace APIGateway.Controllers
       switch (module)
       {
         case "31":
+          var result = ModuleConfigRequests.GetModuleConfigByModule("Equipment", "api-version=1.0");
+          var result2 = result.Result;
           return ModuleConfigRequests.GetModuleConfigByModule("Equipment", "api-version=1.0").Result;
         default:
           return "Bad Request";
@@ -47,12 +49,10 @@ namespace APIGateway.Controllers
       switch (module)
       {
         case "31":
-          var configs = ModuleConfigRequests.GetCntrlsWithValues("Equipment", "api-version=1.0");
-          // var msg = await configs;
+          var configs = ModuleConfigRequests.GetCntrlsWithValues("Equipment", "api-version=1.0");          
           JArray json = ConfigurationParser.ParseResponse(configs.Result);
           for (int i = 0; i < json.Count; i++)
-          {
-            Console.WriteLine(json[0]);
+          {            
             Column column = new Column(json[0]["columnName"].ToString());
             if (column.TableName == "TBL_EquipmentItem")
             {
@@ -69,6 +69,16 @@ namespace APIGateway.Controllers
       }
     }
 
+    [HttpGet("GetModuleSettings")]
+    [EnableCors("APIGatewayPolicy")]
+    public string GetModuleSettings(string module)
+    {
+     
+          return ModuleConfigRequests.GetModuleSettings(module, "api-version=1.0").Result;       
+      
+     
+    }
+
     // GET api/values/5
     [HttpGet("{id}")]
     public string Get(int id)
@@ -77,9 +87,10 @@ namespace APIGateway.Controllers
     }
 
     // POST api/values
-    [HttpPost]
+    [HttpPost("SaveModuleSettings")]
     public void Post([FromBody]string value)
     {
+
     }
 
     // PUT api/values/5

@@ -33,19 +33,31 @@ namespace ModuleConfiguration.Controllers
 
     }*/
 
+    [HttpGet]
+    [EnableCors("ModuleConfigurationPolicy")]
+    public List<TblModuleControlConfig> Get()
+    {
+      return ControlConfigs.Get();
+
+    }
+
     [HttpGet("GetByModule")]
-    [EnableCors("ModueConfigurationPolicy")]
+    [EnableCors("ModuleConfigurationPolicy")]
     public string Get(string module)
     {
       return JsonConvert.SerializeObject(ControlConfigs.GetforModule(module));
 
     }
 
-    [HttpGet]
-    [EnableCors("ModueConfigurationPolicy")]
-    public List<TblModuleControlConfig> Get()
+    [HttpGet("GetModuleSettings")]
+    [EnableCors("ModuleConfigurationPolicy")]
+    public string GetModuleSettings(string module)
     {
-      return ControlConfigs.Get();
+      var result1 = ControlConfigs.GetModuleSettings(module);
+      Console.WriteLine(result1);
+      var result = JsonConvert.SerializeObject(ControlConfigs.GetModuleSettings(module));
+      Console.WriteLine(result);
+      return result;
 
     }
 

@@ -19,6 +19,8 @@ namespace ModulesConfiguration
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
+
+      
     }
 
     public IConfiguration Configuration { get; }
@@ -27,7 +29,7 @@ namespace ModulesConfiguration
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddApiVersioning();
-      services.AddCors(o => o.AddPolicy("ModueConfigurationPolicy", builder =>
+      services.AddCors(o => o.AddPolicy("ModuleConfigurationPolicy", builder =>
       {
         builder.AllowAnyOrigin()
                .AllowAnyMethod()

@@ -18,8 +18,6 @@ namespace APIGateway.Controllers
     public class EquipmentController : Controller
     {
        
-      
-        // GET: api/values
         [HttpGet]        
         [EnableCors("APIGatewayPolicy")]
         public string Get()

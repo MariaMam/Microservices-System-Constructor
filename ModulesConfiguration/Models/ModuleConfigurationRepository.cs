@@ -41,6 +41,16 @@ namespace ModuleConfiguration.Models
       return controls;
     }
 
+    public List<TblModuleControlConfigSetting> GetModuleSettings(string module)
+    {
+      Guid moduleId = _context.TblEmexModule.Where(b => b.Name == module)
+                    .FirstOrDefault().ModuleId;
+
+      List<TblModuleControlConfigSetting> controls = (_context.TblModuleControlConfigSetting.Where(b=>b.ModuleId==moduleId).ToList());
+
+      return controls;
+    }
+
     public void Add(TblModuleControlConfig config)
     {
       config.ModuleControlConfigId = Guid.NewGuid();

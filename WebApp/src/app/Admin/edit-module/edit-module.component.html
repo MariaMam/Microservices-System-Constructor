@@ -1,0 +1,55 @@
+<br>
+  <div>
+  <label for="repeatSelect"> Choose Field: </label>
+
+  <select [(ngModel)]="model">
+    <option *ngFor="let c of filterconfigs(0)" [ngValue]="c">
+      {{ c.ColumnName }}
+    </option>
+  </select>
+
+
+  <button (click)="add()">
+    Add
+  </button>
+</div>
+    <br>
+      <table>
+        <tr>
+          <td><label>Column Name</label></td>
+          <td align="center"><label> Data Type</label></td>
+          <td align="center"><label> Actions </label></td>
+        </tr>
+      </table>
+      <!--<control-box [controls]="controls"></control-box>-->
+
+
+
+<div>
+  <table>
+    <ul class="equipment">
+      <li *ngFor="let cnfg of filterconfigs(1)" (click)="onSelect(equipment)"
+          [class.selected]="config === selecteControl">
+        <tr >
+          <td>
+          {{cnfg.ColumnName}}
+          </td>
+          <td align="center">
+          {{cnfg.DataType}}
+          </td>
+          <td>
+            <button class="delete"
+                (click)="delete(cnfg); $event.stopPropagation()">
+            x
+            </button>
+          </td>
+      </tr>
+      </li>
+      </ul>
+  </table>
+</div>
+<br>
+<button (click)="Save()" align ="right">
+  Save
+</button>
+

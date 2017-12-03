@@ -7,8 +7,7 @@ import { ControlComponent } from './control.component';
 @Component({
   selector: 'control-box',
   template: `
-              <div class="cntrl-box">
-                <h3>Module Controls</h3>
+              <div class="cntrl-box">                
                 <ng-template control-host></ng-template>
               </div>
             `

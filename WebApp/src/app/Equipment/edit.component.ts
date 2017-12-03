@@ -4,15 +4,12 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import { EquipmentItem, EquipmentEditItem } from "./equipment-item";
 import { EquipmentService } from "./equipment.service";
-import { ControlItem } from "../Common/DynamicComponent3/control-item";
-import { AdItem } from "../DynamicComponent2/ad-item";
-import { Service } from "../DynamicComponent/service.service";
-import { ControlService } from "../Common/DynamicComponent3/control.service";
-import { AdService } from "../DynamicComponent2/ad.service";
 import { Module, DataType } from "../../app.enum";
-import { TextBoxComponent } from "../Common/DynamicComponent3/text-box.component";
 import { SimpleChanges } from '@angular/core';
 import { Column } from "../../column-name";
+import { ControlService } from "../Common/control.service";
+import { ControlItem } from "../Common/control-item";
+import { TextBoxComponent } from "../Common/text-box.component";
 
 @Component({
   selector: 'my-edit',
@@ -24,7 +21,6 @@ export class EditComponent implements OnInit {
   service;
   service2;
 
-  ads: AdItem[];
   controls: ControlItem[];
   columnNames: Column[];
   id: string;
@@ -37,9 +33,8 @@ export class EditComponent implements OnInit {
 
   constructor(private equipmentService: EquipmentService,
     private route: ActivatedRoute,
-    private location: Location,
-    //// @Inject(ControlService) controlService,      
-    viewContainerRef: ViewContainerRef, private adService: AdService, private controlService: ControlService) {
+    private location: Location, 
+    viewContainerRef: ViewContainerRef, private controlService: ControlService) {
 
     this.service = ControlService;
     this.viewContainerRef = viewContainerRef;
@@ -53,25 +48,18 @@ export class EditComponent implements OnInit {
       .subscribe(equipment => {
         this.equipment = equipment
         this.updateFields()
-        
+
       });
   }
- 
-  
-  //this.service.setRootViewContainerRef(this.viewContainerRef)
-  //this.service.addDynamicComponent(31)
-  // this.ads = this.adService.getAds();
-  //this.controls = this.controlService.getControls(Module.Equipment);
-
   updateFields(): void {
-    
+
     this.controlService.getControlConfigurationWithValues(Module.Equipment, this.equipment.EquipmentItemId).subscribe(data => {
       var controlItems = data
       console.log(controlItems);
-      
+
       this.controls = controlItems.map(o => {
         this.val = o;
-       
+
         if (this.val.dataType == DataType.String && !this.val.isCustomField) {
 
           return new ControlItem(TextBoxComponent, { label: this.val.columnName, value: this.val.value })

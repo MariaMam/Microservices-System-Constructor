@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -7,11 +7,11 @@ namespace ModuleConfiguration.Models
     public partial class ModuleConfigurationContext : DbContext
     {
 
-    public ModuleConfigurationContext(DbContextOptions<ModuleConfigurationContext> options)    : base(options){ }
-
+    public ModuleConfigurationContext(DbContextOptions<ModuleConfigurationContext> options) : base(options) { }
     public virtual DbSet<TblEmexModule> TblEmexModule { get; set; }
         public virtual DbSet<TblModuleConfig> TblModuleConfig { get; set; }
         public virtual DbSet<TblModuleControlConfig> TblModuleControlConfig { get; set; }
+        public virtual DbSet<TblModuleControlConfigSetting> TblModuleControlConfigSetting { get; set; }
         public virtual DbSet<TblModuleControlRule> TblModuleControlRule { get; set; }
         public virtual DbSet<TblModuleGroupConfig> TblModuleGroupConfig { get; set; }
         public virtual DbSet<TblModuleGroupRule> TblModuleGroupRule { get; set; }
@@ -89,6 +89,20 @@ namespace ModuleConfiguration.Models
                     .WithMany(p => p.TblModuleControlConfig)
                     .HasForeignKey(d => d.ModuleSectionConfigId)
                     .HasConstraintName("FK_TBL_ModuleControlConfig_TBL_ModuleSectionConfig");
+            });
+
+            modelBuilder.Entity<TblModuleControlConfigSetting>(entity =>
+            {
+                entity.HasKey(e => e.ModuleControlConfigSettingId);
+
+                entity.ToTable("TBL_ModuleControlConfigSetting");
+
+                entity.Property(e => e.ModuleControlConfigSettingId).ValueGeneratedNever();
+
+                entity.Property(e => e.ColumnName)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<TblModuleControlRule>(entity =>
