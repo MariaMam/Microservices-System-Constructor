@@ -61,5 +61,14 @@ namespace ModuleConfiguration.Controllers
 
     }
 
+    [HttpPost("UpdateModuleSettings")]
+    public void UpdateModuleSettings([FromBody]JArray value, string module)
+    {
+      
+      ControlConfigs.UpdateModuleSettings(value, module);
+
+      
+  }
+
   }
 }

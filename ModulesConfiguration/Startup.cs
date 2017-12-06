@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using ModuleConfiguration.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace ModulesConfiguration
 {
@@ -43,7 +45,8 @@ namespace ModulesConfiguration
         options.ConfigureWarnings(warnings => warnings.Throw(
         RelationalEventId.QueryClientEvaluationWarning));
       });
-
+      services.Configure<FormOptions>(options => options.BufferBody = true);
+      //Receiver.Receive();
       services.AddMvc();
 
     }
@@ -55,7 +58,7 @@ namespace ModulesConfiguration
       {
         app.UseDeveloperExceptionPage();
       }
-
+      app.Use((context, next) => { context.Request.EnableRewind(); return next(); });
       app.UseMvc();
     }
   }

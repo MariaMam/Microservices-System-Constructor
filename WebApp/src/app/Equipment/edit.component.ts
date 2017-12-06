@@ -60,9 +60,9 @@ export class EditComponent implements OnInit {
       this.controls = controlItems.map(o => {
         this.val = o;
 
-        if (this.val.dataType == DataType.String && !this.val.isCustomField) {
+        if (this.val.DataType == DataType.String && !this.val.IsCustomField) {
 
-          return new ControlItem(TextBoxComponent, { label: this.val.columnName, value: this.val.value })
+          return new ControlItem(TextBoxComponent, { label: this.val.ColumnName, value: this.val.value })
 
         }
       }

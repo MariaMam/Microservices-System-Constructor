@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace ModuleConfiguration.Models
     List<TblModuleControlConfig> GetforModule(string module);
     List<TblModuleControlConfig> Get();
     List<TblModuleControlConfigSetting> GetModuleSettings(string module);
+    void UpdateModuleSettings(JArray configs, string module);
 
   }
 }

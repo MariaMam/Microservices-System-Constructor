@@ -20,7 +20,7 @@ export class EditModuleComponent implements OnInit {
   module: string;
   config: any;
   controls: ControlItem[];
-  controlsNotConfigured: ControlItem[];
+  controlsChanged: ControlItem[];
   cnf: any;
   select: any;
   model: any;
@@ -35,12 +35,12 @@ export class EditModuleComponent implements OnInit {
 
   ngOnInit() {
 
-    var a = this.route.paramMap;
-    var columnsWithValue;
+
+   
     this.route.paramMap
       .switchMap((params: ParamMap) => this.controlService.getConfigurationSettings(params.get('module')))
       .subscribe(config => {
-        this.config = config
+        this.config = config       
         this.updateFields()
 
       });
@@ -56,22 +56,11 @@ export class EditModuleComponent implements OnInit {
 
       if (this.cnf.DataType == DataType.String) {
 
-        return new ControlItem(LabelComponent, { label: this.cnf.ColumnName, value: this.cnf.DataType })
+        return new ControlItem(LabelComponent, this.cnf)
+        //return new ControlItem(LabelComponent, { label: this.cnf.ColumnName, value: this.cnf.DataType })
 
       }
     });
-
-    
-    /*this.controls = this.config.map(o => {
-        this.cnf = o;
- 
-        if (this.cnf.DataType == DataType.String) {
- 
-          return new ControlItem(TextBoxComponent, { label: this.cnf.ColumnName, value: this.cnf.DataType})
- 
-        }*/
-
-
 
     console.log("Configured Controls : ");
     console.log(this.controls);
@@ -95,6 +84,12 @@ export class EditModuleComponent implements OnInit {
 
     conf.IsConfigured = false;
     console.log(this.config);
+
+  }
+
+  Save(conf): void {
+
+    this.controlService.saveModuleConfigurationSettings('31', this.controls)
 
   }
 }

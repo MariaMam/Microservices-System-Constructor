@@ -52,8 +52,9 @@ namespace APIGateway.Controllers
           var configs = ModuleConfigRequests.GetCntrlsWithValues("Equipment", "api-version=1.0");          
           JArray json = ConfigurationParser.ParseResponse(configs.Result);
           for (int i = 0; i < json.Count; i++)
-          {            
-            Column column = new Column(json[0]["columnName"].ToString());
+          {
+            Console.WriteLine(json[i]);
+            Column column = new Column(json[i]["ColumnName"].ToString());
             if (column.TableName == "TBL_EquipmentItem")
             {
               var record = ConfigurationParser.ParseResponseObject(EquipmentRequests.Get(entityId, "api-version=1.0").Result);
@@ -83,14 +84,23 @@ namespace APIGateway.Controllers
     [HttpGet("{id}")]
     public string Get(int id)
     {
+      Emitter.Emit("My future json data", "ModuleSettingsChange");
       return "value";
     }
 
     // POST api/values
-    [HttpPost("SaveModuleSettings")]
-    public void Post([FromBody]string value)
-    {
+    [HttpPost("UpdateModuleSettings")]
 
+    public string UpdateModuleSettings([FromBody]JArray body, string module, string config)
+    {
+      switch (module)
+      {
+        case "31":
+          return ModuleConfigRequests.UpdateModuleSettings(body, "Equipment", "api-version=1.0").Result.ToString();
+        default:
+          return "Bad Request";
+          break;
+      }
     }
 
     // PUT api/values/5

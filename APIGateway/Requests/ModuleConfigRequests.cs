@@ -2,9 +2,12 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
+
 
 namespace APIGateway.Requests
 {
@@ -59,6 +62,19 @@ namespace APIGateway.Requests
     }
 
 
+    public static async Task<HttpStatusCode> UpdateModuleSettings(JArray data, string module, string version)
+    {
+      var client = new HttpClient();      
+      var localurl = Url + "/UpdateModuleSettings?module=" + module + "&" + version;
+      var result = await client.PostAsync(
+                                localurl,
+                                new StringContent(data.ToString(),Encoding.UTF8,"application/json"));
 
-  }
+      return result.StatusCode;
+
+
+    }
+
+
+}
 }
