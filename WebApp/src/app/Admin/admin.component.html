@@ -1,8 +1,16 @@
 <h3>Admin Modules</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let adminmodule of adminmodules"  [routerLink]="['/EditModule', adminmodule]"  class="col-1-4">
+  <a *ngFor="let adminmodule of adminmodules" [routerLink]="['/EditModule', adminmodule]" class="col-1-4">
     <div class="module adminmodule">
       <h4>{{adminmodule}}</h4>
+    </div>
+  </a>
+</div>
+<h3>Development Actions</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let acts of devactions" [routerLink]="['/DevAction', acts.url]"  class="col-1-4">
+    <div class="module adminmodule">
+      <h4>{{acts.action}}</h4>
     </div>
   </a>
 </div>

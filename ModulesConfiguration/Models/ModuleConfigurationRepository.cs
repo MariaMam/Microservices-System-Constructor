@@ -90,7 +90,7 @@ namespace ModuleConfiguration.Models
 
         foreach (var obj in configs)
         {
-          var el = obj["data"];
+          var el = obj["data"];   
 
           TblModuleControlConfigSetting cnf = JsonConvert.DeserializeObject<TblModuleControlConfigSetting>(el.ToString());
           _context.TblModuleControlConfigSetting.Update(cnf);
@@ -106,7 +106,10 @@ namespace ModuleConfiguration.Models
 
             cnf.ModuleControlConfigId = newConfig.ModuleControlConfigId;
             _context.TblModuleControlConfig.AddAsync(newConfig);
-            _context.Update(cnf);
+            var c = _context.TblModuleControlConfigSetting.FirstOrDefault(a => a.ModuleControlConfigSettingId == cnf.ModuleControlConfigSettingId);
+            c.ModuleControlConfigId = cnf.ModuleControlConfigId;
+            c.IsConfigured = true;
+            _context.TblModuleControlConfigSetting.Update(c);
 
           }
 
@@ -116,17 +119,21 @@ namespace ModuleConfiguration.Models
             cnf.ModuleControlConfigId = null;
             cnf.IsConfigured = false;
             _context.TblModuleControlConfig.Remove(o);
-            _context.Update(cnf);
+            var c=_context.TblModuleControlConfigSetting.FirstOrDefault(a => a.ModuleControlConfigSettingId == cnf.ModuleControlConfigSettingId);
+            c.ModuleControlConfigId = null;
+            c.IsConfigured = false;
+            _context.TblModuleControlConfigSetting.Update(c);
 
           }
           
 
         }
-        _context.SaveChangesAsync();
+        _context.SaveChanges();
+        //_context.SaveChangesAsync();
         
       }
       catch (Exception ex) {
-
+        
         Console.WriteLine(ex.Message);
         
       }

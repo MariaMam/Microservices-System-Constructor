@@ -1,0 +1,18 @@
+<h2>NewModuleTemplateUrl</h2>
+<ul class="equipment">
+  <li *ngFor="let element of newModuleTemplateElements" (click)="onSelect(element)" 
+      [class.selected]="element === selectedElement">
+    <span class="badge">{{element.id}}</span>
+    <span>{{element.assetNumber}} :: {{element.name}}</span>
+    <button class="delete"
+            (click)="delete(element); $event.stopPropagation()">
+      x
+    </button>
+    <button class="edit" [routerLink]="['/edit/newModuleTemplateElements',element.elementItemId]" >
+      Edit
+    </button>
+  </li>
+</ul>
+
+
+

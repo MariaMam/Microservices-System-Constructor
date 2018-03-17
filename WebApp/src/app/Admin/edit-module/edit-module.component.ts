@@ -80,15 +80,17 @@ export class EditModuleComponent implements OnInit {
   
   }
 
-  delete(conf): void {
+  delete(cnf): void {
 
-    conf.IsConfigured = false;
+    cnf.IsConfigured = false;
+    this.controls.filter(x => x.data.ModuleControlConfigId == cnf.ModuleControlConfigId)[0].data.IsConfigured=false;
     console.log(this.config);
 
   }
 
   Save(conf): void {
 
+    console.log(this.controls);
     this.controlService.saveModuleConfigurationSettings('31', this.controls)
 
   }

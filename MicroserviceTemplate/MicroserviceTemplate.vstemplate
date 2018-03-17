@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MicroserviceTemplate</Name>
+    <Description>MicroserviceTemplate</Description>
+    <Icon>MicroserviceTemplate.ico</Icon>
+    <TemplateID>0eaa64a5-0075-431a-9f67-b6cdb2bcd39a</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>Class.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true">Class.cs</ProjectItem>   
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>MyProjectWizard, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=60d8dbd7a5170d7b</Assembly>
+    <FullClassName>MyProjectWizard.WizardImplementation</FullClassName>
+  </WizardExtension>
+</VSTemplate>

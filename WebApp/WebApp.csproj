@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="src\app\Admin\Development\" />
     <Folder Include="src\NewFolder\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
